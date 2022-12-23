@@ -1,0 +1,210 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-auto">
+            <span class="fs-1">{{foundService.serviceName}}</span>
+        </div>
+        <div class="col-sm-auto">
+            <div class="row">
+                <div>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal"
+                        data-bs-target="#reviewModal">
+                        Leave Review
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col">
+            <div class="row justify-content-end">
+                <div class="col-sm-auto">
+                    <form action="/fav/{{foundService._id}}" method="post" class="d-inline">
+                        <input type="text" hidden>
+                        <button type="submit" class="btn btn-primary">Favorite</button>
+                    </form>
+                    
+                </div>
+                <div class="col-sm-auto">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Dropdown button
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Leave Review</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="reviewModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Leave a Review</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="review-form" action="/reviews/{{foundService._id}}" method="post">
+                        <div>
+                            <label for="reviewTitle" class="form-label">Title</label>
+                            <input type="text" class="form-control" name="reviewTitle" id="reviewTitle">
+                            <div hidden id="invalidReviewTitle" class="text-danger"></div>
+                        </div>
+                        <div>
+                            <label for="reviewBody" class="form-label">Review</label>
+                            <textarea name="reviewBody" class="form-control" id="reviewBody"></textarea>
+                            <div hidden id="invalidReviewBody" class="text-danger"></div>
+                        </div>
+
+                        <div class="col">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                                    value="1">
+                                <label class="form-check-label" for="inlineRadio1">1</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                                    value="2">
+                                <label class="form-check-label" for="inlineRadio2">2</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3"
+                                    value="3">
+                                <label class="form-check-label" for="inlineRadio3">3</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4"
+                                    value="4">
+                                <label class="form-check-label" for="inlineRadio4">4</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio5"
+                                    value="5">
+                                <label class="form-check-label" for="inlineRadio3">5</label>
+                            </div>
+                            <div hidden id="radioError" class="text-danger"></div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row form-group align-items-center">
+        <div class="col col-sm-auto">
+            <span class="fs-2">{{posterUsername}}</span>
+        </div>
+        <div class="col">
+            <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                Contact Info
+            </button>
+            <div class="collapse" id="collapseExample">
+                <div class="card card-body">
+                    <dl>
+                        <dt>Email</dt>
+                        <dd><a href="mailto:{{foundService.email}}">{{foundService.email}}</a></dd>
+                        <dt>Phone Number</dt>
+                        <dd>{{foundService.phoneNumber}}</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row form-group"></div>
+
+
+    <div class="row">
+        {{#if foundService.image}}
+
+        <div class="col">
+            <div class="card" style="min-width: 10rem; max-width: 25rem">
+                <img src="/uploads/{{foundService.image}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="card-text">An image of some work I've done</p>
+                </div>
+            </div>
+        </div>
+        {{/if}}
+
+
+        {{#if foundService.video}}
+        <div class="col">
+            <div class="card" style="min-width: 25rem;">
+                <video width="320" height="240" controls>
+                    <source src="/uploads/{{foundService.video}}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="card-body">
+                    <p class="card-text">A video of my work.</p>
+                </div>
+            </div>
+        </div>
+        {{/if}}
+    </div>
+
+
+    <div class="row gy-2">
+        <div class="d-grid gap-2">
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#description"
+                aria-expanded="false" aria-controls="service description">
+                Service Description
+            </button>
+            <div class="collapse" id="description">
+                <div class="card card-body">
+                    <p>{{foundService.description}}</p>
+                    <dl>
+                        <dt>Average Price</dt>
+                        <dd>{{foundService.typicalCharge}}</dd>
+                        <dt>Average Time</dt>
+                        <dd>{{foundService.avgCompletionTime}}</dd>
+                        <dt>Average Rating</dt>
+                        <dd>{{avgRating}}</dd>
+                    </dl>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="d-grid gap-2">
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#reviews"
+                aria-expanded="false" aria-controls="reviews">
+                Reviews
+            </button>
+            <div class="collapse" id="reviews">
+                {{#unless foundReviews}}
+                <p>No reviews yet!</p>
+                {{/unless}}
+                {{#each foundReviews}}
+                <div class="card card-body" style="max-width: 75vw;">
+                    <h3>{{reviewTitle}}</h3>
+                    <p>{{reviewMessage}}</p>
+                    <p class="fw-bold">Rating: {{rating}}</p>
+                    <div class="col align-self-end">
+                        <span class="fw-bold">{{reviewerUsername}}</span>
+                        <span> on {{date}}</span>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<script src="/public/js/reviewValidation.js"></script>

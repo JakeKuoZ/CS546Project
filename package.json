@@ -1,0 +1,43 @@
+{
+  "name": "localbuds_service_finding",
+  "version": "1.0.0",
+  "description": "Here you can find people who can do local work for you",
+  "main": "app.js",
+  "scripts": {
+    "watch": "nodemon ./app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js",
+    "seed": "node ./tasks/seed.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/parth-paghdal-132/LocalBuds-Service-Finding.git"
+  },
+  "keywords": [
+    "localbuds",
+    "local",
+    "service",
+    "finding",
+    "group",
+    "project"
+  ],
+  "author": "Group 22",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/parth-paghdal-132/LocalBuds-Service-Finding/issues"
+  },
+  "homepage": "https://github.com/parth-paghdal-132/LocalBuds-Service-Finding#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.1",
+    "express": "^4.18.2",
+    "express-handlebars": "^6.0.6",
+    "express-session": "^1.17.3",
+    "handlebars": "^4.7.7",
+    "mongodb": "^4.11.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^2.0.20",
+    "querystring": "^0.2.1",
+    "xss": "^1.0.14"
+  }
+}

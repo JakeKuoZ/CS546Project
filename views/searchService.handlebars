@@ -1,0 +1,154 @@
+<div id="search-Container">
+    <div class="row justify-content-center">
+        <div class="col-7">
+            <h2>Find your service</h2>
+            <form action="/search" method="GET" id="searchForm" class="searchForm">
+                <label for="searchInput">Searching service</label>
+                <br />
+                <input type="text" name="searchInput" id="searchInput" placeholder="eg:heating" class="searchInput" />
+
+                <button type="submit" id="searchButton">Search</button>
+                <div style="display: flex;width: 100%;padding: 20px 0 20px;">
+                    <div style="margin-right: 20px;">
+                        <label for="price">Sort by price:</label>
+                        <select name="price" id="price">
+                            <option value="">none</option>
+                            <option value="-1">desc</option>
+                            <option value="1">asc</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="rating">Sort by rating:</label>
+                        <select name="rating" id="rating">
+                            <option value="">none</option>
+                            <option value="-1">desc</option>
+                            <option value="1">asc</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="button" class="searchSelect">Select Category</button>
+                <fieldset class="content">
+                    <legend>Choose your interests</legend>
+                    <div class="mb-3" style="display: flex;flex-wrap: wrap;">
+                        {{#each interests}}
+                        <div style="margin-left: 20px;">
+                            <input type="checkbox" id="{{value}}" name="Category" value="{{value}}" />
+                            <label for="{{value}}">{{value}}</label>
+                        </div>
+                        {{/each}}
+                        <br />
+                        <div class="invalid-feedback" id="errServiceCategory"></div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div>
+    <p>{{error}}</p>
+</div>
+
+<div id="error-container">
+    <div class="text-goes-here">
+    </div>
+</div>
+<div>
+    <h5>Service List:</h5>
+    {{#if noData }}
+    <div style="color: #666;padding-top: 20px;">
+        No matches found
+    </div>
+    {{/if}}
+    {{#each service}}
+    {{!-- <article class="serviceName">
+        <ul id="mySearchUL">
+            <li><a href="/service/{{_id}}">{{serviceName}}</a>
+                <p>Description: {{description}}</p>
+            </li>
+        </ul>
+    </article> --}}
+    <div class="listItem">
+        <div>
+            <div>
+                <a href="/service/{{_id}}">{{serviceName}}</a>
+                <span style="color: red;margin-left: 20px;">${{typicalCharge}}</span>
+            </div>
+            <div style="display: flex;margin: 10px 0;">
+                <div style="font-size: 12px;color: #fff;padding: 2px 5px;background: #2196f3;border-radius: 5px;">
+                    {{category}}
+                </div>
+                <div>
+                    {{keywords}}
+                </div>
+            </div>
+            <div>
+                average rating: <span style="color: goldenrod;font-weight: bold;">{{avgRating}}</span>
+            </div>
+            <div>
+                Description: {{description}}
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</div>
+<style>
+    .linkItemBox{
+        display: flex;
+        justify-content: center;
+    }
+    .linkItem{
+        margin-right: 20px;
+        text-decoration: none;
+        width: 36px;
+        height: 36px;
+        border-radius: 6px;
+        background: #f5f5f6;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .linkItem:hover{
+        color: #2196f3;
+    }
+    .linkItem:last-child{
+        margin-right: 0;
+    }
+    .linkItemActive{
+        background: #2196f3;
+        color: white;
+    }
+    .linkItemActive:hover{
+        color: #fff;
+    }
+</style>
+<div class="linkItemBox">
+    {{#each pageArr}}
+        <a class="linkItem" href="/search?page={{index}}&{{query}}">{{index}}</a>
+    {{/each}}
+</div>
+
+<script>
+    var page = {{page}};
+    console.log("page = ", page)
+    if(document.getElementsByClassName("linkItem")[Number(page - 1)]){
+document.getElementsByClassName("linkItem")[Number(page - 1)].classList = "linkItem linkItemActive";
+    }
+    
+    var coll = document.getElementsByClassName("searchSelect");
+    var i; for (i = 0;
+        i < coll.length; i++) {
+        coll[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            }
+            else {
+                content.style.display = "block";
+            }
+        });
+    }
+</script>

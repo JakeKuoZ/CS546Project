@@ -1,0 +1,39 @@
+
+<Button><a href="/service">add your service</a></Button>
+
+
+
+
+{{#each service}}
+    <div class="listItem">
+      <div>
+        <div>
+          <a href="/service/{{_id}}">{{serviceName}}</a>
+          <span style="color: red;margin-left: 80px;">${{typicalCharge}}</span>
+        </div>
+        <div style="display: flex;margin: 10px 0;">
+          <div style="font-size: 12px;color: #fff;padding: 2px 5px;background: #2196f3;border-radius: 5px;">
+            {{category}}
+          </div>
+        </div>
+        <div>
+          Description: {{description}}
+        </div>
+      </div>
+    </div>
+  {{/each}}
+
+
+
+<p>
+    the email is {{content.email}}
+</p>
+<p>
+    the date is {{content.date}}
+</p>
+
+<div id="error" class="error" {{hidden}}>
+{{error_information}}
+</div>
+<br>
+<a href="/logout">Click here to logout!</a>

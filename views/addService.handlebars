@@ -1,0 +1,121 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-7">
+            <h2 class="mb-5">Add Your Service</h2>
+            <div class="alert alert-danger d-none" role="alert" id="otherErrorArea"></div>
+            <form action="/service" method="post" id="addServiceForm" class="needs-validation" enctype="multipart/form-data" novalidate>
+                <div class="mb-3">
+                    <label for="serviceName" class="form-label">* Service Name</label>
+                    <input type="text" class="form-control" id="serviceName" name="serviceName" placeholder="Neo's Heating Service" required>
+                    <div class="invalid-feedback" id="errServiceName"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="serviceDescription" class="form-label">* Service Description</label>
+                    <textarea class="form-control" id="serviceDescription" name="serviceDescription" rows="3" required></textarea>
+                    <div class="invalid-feedback" id="errServiceDescription"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="serviceCategory" class="form-label">* Service Category</label>
+                    <select class="form-select" id="serviceCategory" name="serviceCategory" onchange="toggleOtherCategoryTextbox(this)" required>
+                        <option selected>Select your service category</option>
+                        <option>Hvac</option>
+                        <option>Heating/cooling</option>
+                        <option>Landscaping</option>
+                        <option>Gutters</option>
+                        <option>Snow</option>
+                        <option>Inside Cleaning</option>
+                        <option>Roofing</option>
+                        <option>Furniture Assembly</option>
+                        <option>Interior Paint and Stain</option>
+                        <option>Drywall Maintenance and Repairs</option>
+                        <option>Plumbing</option>
+                        <option>Electrical</option>
+                        <option>Carpentry</option>
+                        <option>Window Coverings</option>
+                        <option>Interior Winterization</option>
+                        <option>Babyproofing</option>
+                        <option>Door Hardware Installation</option>
+                        <option>Tiling</option>
+                        <option>Senior Home Upgrades</option>
+                        <option>Pressure Washing</option>
+                        <option>Screen Installation and Repairs</option>
+                        <option>Exterior Paint and Stain</option>
+                        <option>General Yard Maintenance</option>
+                        <option>Fence and Gate Repairs</option>
+                        <option>Other...</option>
+                    </select>
+                    <div class="invalid-feedback" id="errServiceCategory"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="otherServiceCatgoryName" class="form-label">* Other Service Category Name</label>
+                    <input type="text" class="form-control" id="otherServiceCategoryName" name="otherServiceCategoryName" disabled>
+                    <div class="invalid-feedback" id="errOtherServiceCategoryName"></div>
+                </div>
+                <div>
+                    <label for="phoneNumber" class="form-label">* Phone Number</label>
+                </div>
+                <div class="input-group mb-3 has-validation">
+                    <span class="input-group-text">US +1</span>
+                    <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="(123)-456-7890" value="{{phoneNumber}}">
+                    <div class="invalid-feedback" id="errPhoneNumber"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="emailAddress" class="form-label">* E-Mail Address</label>
+                    <input type="email" class="form-control" id="email" name="email" value="{{email}}">
+                    <div class="invalid-feedback" id="errEmail"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="imageFile" class="form-label">Select image for your service</label>
+                    <input class="form-control" type="file" id="imageFile" name="imageFile" aria-describedby="imageFileInstruction" accept="image/png, image/jpeg, image/jpg">
+                    <div id="imageFileInstruction" class="form-text">your image file should be in jpeg, jpg or png file no more than 3 MB.</div>
+                    <div class="invalid-feedback" id="errImageFile"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="videoFile" class="form-label">Select video for your service</label>
+                    <input class="form-control" type="file" id="videoFile" name = "videoFile" aria-describedby="videoFileInstruction"
+                    accept="video/mp4, video/x-matroska, video/mpeg">
+                    <div id="videoFileInstruction" class="form-text">Your video file should be in mp4, mkv or mpeg format and no more than 50 MB.</div>
+                    <div class="invalid-feedback" id="errVideoFile"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="keywords" class="form-label">* Keywords</label>
+                    <input class="form-control" type="text" id="keywords" name="keywords" aria-describedby="keywordsInstruction" placeholder="neo, heating, warm, winter services" required>
+                    <div id="keywordsInstruction" class="form-text">We never show your keywords to user but it will be helpful to present relavant service with user search.</div>
+                    <div class="invalid-feedback" id="errKeywords"></div>
+                </div>
+                <div>
+                    <label for="typicalCharge" class="form-label">* Typical Charge</label>
+                </div>
+                <div class="input-group mb-3 has-validation">
+                    <span class="input-group-text">$</span>
+                    <input type="number" class="form-control" id="typicalCharge" name="typicalCharge" min=15 max=150 required>
+                    <span class="input-group-text">.00 / per hour</span>
+                    <div class="invalid-feedback" id="errTypicalCharge"></div>
+                </div>
+                <div>
+                    <label for="averageCompletionTime" class="form-lablel">* Average Completion Time</label>
+                </div>
+                <div class="input-group mb-5 has-validation">
+                    <input type="number" class="form-control" id="avgCompletionTime" name="avgCompletionTime" min=1 required>
+                    <span class="input-group-text">hours</span>
+                    <div class="invalid-feedback" id="errAvgCompletionTime"></div>
+                </div>
+                <div class="">
+                    <button type="submit" class="btn btn-primary float-start ps-4 pe-4" id="addService">Add Service</button>
+                    <button type="reset" class="btn btn-outline-secondary float-end ps-4 pe-4" id="reset">Reset</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+    
+<script src="/public/js/serviceValidation.js"></script>
+<script>
+    {{#if hasError}}
+        const errorsJsonString = `{{{errors}}}`
+        const dataJsonString = `{{{data}}}`
+        showErrorsAndFillData(JSON.parse(errorsJsonString), JSON.parse(dataJsonString))
+    {{/if}}
+</script>
+
+

@@ -1,0 +1,53 @@
+<div class="container" id="information">
+    <div class="row justify-content-center">
+        <div class="col-7 text-center mb-3">
+            <h2 id="name">{{data.firstName}} {{data.lastName}}</h2>
+        </div>
+        <div class="col-12 text-center mb-3">
+            <p id="bio">{{data.bio}}</p>
+        </div>
+        <div class="col-6 text-center">
+            <span>Phone Number: </span>
+            <p id="phoneNumber">{{data.phoneNumber}}</p>
+        </div>
+        <div class="col-6 text-center">
+            <span>Email: </span>
+            <p id="email">{{data.email}}</p>
+        </div>
+        <div class="col-9">
+            <p class="mb-2 mt-2">Social Media Links:</p>
+            <p id="facebook" class="mb-1">
+                <span class="fw-bold">Facebook: </span>
+                <a href="{{data.socialMedias.facebook}}" id="facebookAnchor" target="_blank">{{data.socialMedias.facebook}}</a>
+            </p>
+            <p id="instagram" class="mb-1">
+                <span class="fw-bold">Instagram: </span>
+                <a href="{{data.socialMedias.instagram}}" id="instagramAnchor" target="_blank">{{data.socialMedias.instagram}}</a>
+            </p>
+            <p id="website" class="mb-1">
+                <span class="fw-bold">Website: </span>
+                <a href="{{data.socialMedias.website}}" id="websiteAnchor" target="_blank">{{data.socialMedias.website}}</a>
+            </p>
+            <p id="noSocialMedia"></p>
+        </div>
+    </div>
+</div>
+<div class="container" id="noUserInfo">
+    <div class="alert alert-info" role="alert">
+        This user has not posted user info
+    </div>
+</div>
+<script src="/public/js/userInfo.js"></script>
+<script>
+    let divNoUserInfo = document.getElementById("noUserInfo") 
+    let divInformation = document.getElementById("information")
+    {{#if isDataPosted}}
+    divNoUserInfo.classList.add("d-none")
+    divInformation.classList.remove("d-none")
+    const dataJsonString = `{{{dataString}}}`
+    showUserInfo(JSON.parse(dataJsonString))
+    {{else}}
+    divInformation.classList.add("d-none")
+    divNoUserInfo.classList.remove("d-none")
+    {{/if}}
+</script>

@@ -1,0 +1,159 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-7">
+            <h2 class="mb-5">Profile Information</h2>
+            <div class="alert alert-danger d-none" role="alert" id="otherErrorArea"></div>
+            <div class="alert alert-success d-none" role="alert" id="successNotificationArea"></div>
+            <form action="/user/myprofile" method="post" id="profileInformationForm" class="needs-validation" novalidate>
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label for="firstName" class="form-label">* First Name</label>
+                        <input type="text" class="form-control" id="firstName" name="firstName" placeholder="John" required>
+                        <div class="invalid-feedback" id="errFirstName"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="lastName" class="form-label">* Last Name</label>
+                        <input type="text" class="form-control" id="lastName" name="lastName" placeholder="O'Connor" required>
+                        <div class="invalid-feedback" id="errLastName"></div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="bio" class="form-label">Bio</label>
+                    <textarea class="form-control" id="bio" name="bio" rows="4" placeholder="Write some awsome about you. So you can catch more customer. For example, High-quality workmanship at great prices. ⚒️" required></textarea>
+                    <div class="invalid-feedback" id="errBio"></div>
+                </div>
+                <div>
+                    <label for="phoneNumber" class="form-label">* Phone Number</label>
+                </div>
+                <div class="input-group mb-3 has-validation">
+                    <span class="input-group-text">US +1</span>
+                    <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="(123)-456-7890">
+                    <div class="invalid-feedback" id="errPhoneNumber"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">* E-mail Address</label>
+                    <input type="email" class="form-control" id="email" name="email" disabled>
+                    <div class="invalid-feedback" id="errEmail"></div>
+                </div>
+                <div class="row g-3 mb-3">
+                    <div class="col-md-7">
+                        <label for="username" class="form-label">* Username</label>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="johnIsGreat" required>
+                        <div class="invalid-feedback" id="errUsername"></div>
+                        <div class="form-text" id="usernameInstruction">Your user name should contain alphabets, number, underscore(_), and period(.).</div>
+                    </div>
+                    <div class="col-md-5 text-center">
+                        <label for="changePassword" class="form-label invisible">Change password</label>
+                        <button type="button" class="btn btn-primary ps-4 pe-4" id="changePassword" data-bs-toggle="modal" data-bs-target="#passwordChangeConfirmationDialog">Change Password</button>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="birthDate" class="form-label">* Birth Date</label>
+                    <input type="date" class="form-control" id="birthDate" name="birthDate">
+                    <div class="invalid-feedback" id="errBirthDate"></div>
+                    <div id="birthDateInstruction" class="form-text">We never show your birth date to other user. We are keeping this to verify are you allowed to work or not?</div>
+                </div>
+                <div>
+                    <label for="socialProfiles" class="form-label">Social Media URLs</label>
+                </div>
+                <div class="input-group has-validation mb-1">
+                    <button class="btn btn-outline-secondary" type="button" id="btnFacebook">
+                        <i class="bi bi-facebook"></i>
+                    </button>
+                    <input type="url" class="form-control" id="facebook" name="facebook" placeholder="https://www.facebook.com/john.o'conner.68" aria-label="Enter your facebook profile URL.">
+                    <div class="invalid-feedback" id="errFacebook"></div>
+                </div>
+                <div class="input-group has-validation mb-1">
+                    <button class="btn btn-outline-secondary" type="button" id="btnInstagram">
+                        <i class="bi bi-instagram"></i>
+                    </button>
+                    <input type="url" class="form-control" id="instagram" name="instagram" placeholder="https://www.instagram.com/johnIsTheOne" aria-label="Enter your instagram profile URL.">
+                    <div class="invalid-feedback" id="errInstagram"></div>
+                </div>
+                <div class="input-group has-validation mb-5">
+                    <button class="btn btn-outline-secondary" type="button" id="btnWebsite">
+                        <i class="bi bi-globe"></i>
+                    </button>
+                    <input type="url" class="form-control" id="website" name="website" placeholder="https://www.thisisjohn.com" aria-label="Enter your website URL.">
+                    <div class="invalid-feedback" id="errWebsite"></div>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary float-start ps-4 pe-4" id="updateProfile">Update</button>
+                    <button type="reset" class="btn btn-outline-secondary float-end ps-4 pe-4" id="reset">Reset</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" role="dialog" id="passwordChangeConfirmationDialog" tabindex="-1" aria-labelledby="passwordChangeConfirmationDialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="passwordChangeConfirmationLabel">Change Password</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="">
+                        <label for="currentPassword" class="col-form-label">Current Password</label>
+                    </div>
+                    <div class="mb-3 input-group has-validation">
+                        <input type="password" class="form-control" id="currentPassword" name="currentPassword">
+                        <button class="btn btn-outline-secondary" type="button" id="currentPasswordToggle">
+                            <i class="bi-eye-slash-fill" id="currentPasswordToggleIcon"></i>
+                        </button>
+                        <div class="invalid-feedback" id="errCurrentPassword"></div>
+                    </div>
+                    <div>
+                        <label for="newPassword" class="col-form-label">New Password</label>
+                    </div>
+                    <div class="mb-3 input-group has-validation">
+                        <input type="password" class="form-control" id="newPassword" name="newPassword">
+                        <button class="btn btn-outline-secondary" type="button" id="newPasswordToggle">
+                            <i class="bi-eye-slash-fill" id="newPasswordToggleIcon"></i>
+                        </button>
+                        <div class="invalid-feedback" id="errNewPassword"></div>
+                    </div>
+                    <div>
+                        <label for="confirmPassword" class="form-label">Confirm Password</label>
+                    </div>
+                    <div class="mb-4 input-group has-validation">
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
+                        <button class="btn btn-outline-secondary" type="button" id="confirmPasswordToggle">
+                            <i class="bi-eye-slash-fill" id="confirmPasswordToggleIcon"></i>
+                        </button>
+                        <div class="invalid-feedback" id="errConfirmPassword"></div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-text">* Your password must be 6 charcter long and it should contain 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character.</div>
+                    </div>
+                </form>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary me-3" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="updatePassword">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/public/js/usersValidation.js"></script>
+<script>
+    {{#if hasData}}
+    const dataJsonString = `{{{data}}}`
+    fillData(JSON.parse(dataJsonString))
+    {{/if}}
+    {{#if hasError}}
+    const errorsJsonString = `{{{errors}}}`
+    console.log(errorsJsonString)
+    showErrors(JSON.parse(errorsJsonString))
+    {{/if}}
+    {{#if isUpdated}}
+    showSuccessUpdate()
+    {{else}}
+    hideSuccessUpdate()
+    {{/if}}
+
+</script>
